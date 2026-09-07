@@ -281,7 +281,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <div class="lb" id="lb"><img id="lbImg" alt=""></div>
 <div class="toast" id="toast"></div>
 
-<script src="vendor/jszip.min.js"></script>
+<script>
+(function(){ // 打包用的 JSZip：多个 CDN 依次尝试
+  var srcs=['https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js','https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'];
+  (function next(i){ if(i>=srcs.length||window.JSZip) return; var s=document.createElement('script'); s.src=srcs[i]; s.onerror=function(){ next(i+1); }; document.head.appendChild(s); })(0);
+})();
+</script>
 <script>
 /* ========== 配置 ========== */
 const CFG = { owner:'tuan19960216-crypto', repo:'hangchuangying-opc', branch:'main', dataPath:'data/posts.json', maxEdge:1600, quality:0.86 };
